@@ -42,7 +42,7 @@ def build_db(file):
     This populates our database. Relations will be stored as a JSON list
     """
 
-    collection = BeautifulSoup(file, 'lxml')
+    collection = BeautifulSoup(file, 'html5lib')
 
     #tidy up our XML, removing all div tags
     for div in collection.find_all('div'):
