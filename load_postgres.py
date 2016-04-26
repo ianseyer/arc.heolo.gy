@@ -4,6 +4,8 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from pymongo import MongoClient
 from bs4 import BeautifulSoup
+from tidylib import tidy_document
+
 import os, sys, json
 
 rootdir = '/home/relay/code/wiki/dump/'
@@ -39,7 +41,13 @@ def build_db(file):
     """
     This populates our database. Relations will be stored as a JSON list
     """
+
     collection = BeautifulSoup(file, 'lxml')
+
+    #tidy up our XML, removing all div tags
+    for div in collection.find_all('div'):
+        div.replaceWith('')
+
     #remove style and div tags
     if collection.div:
         collection.div.decompose()
