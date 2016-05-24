@@ -9,8 +9,8 @@ if len(sys.argv) != 4:
 else:
     graph = Graph("http://neo4j:wikipedia@localhost:7474/db/data/")
 
-    a = graph.find_one("Article", "title", sys.argv[1].lower())
-    b = graph.find_one("Article", "title", sys.argv[2].lower())
+    a = graph.find_one("Article", "lowerTitle", sys.argv[1].lower())
+    b = graph.find_one("Article", "lowerTitle", sys.argv[2].lower())
     if a and b:
         ENDPOINT = "http://neo4j:wikipedia@localhost:7474/db/data/"
         request = {
@@ -20,7 +20,7 @@ else:
                 "type":"LINKS",
                 "direction":"out"
             },
-            "algorithm":"allSimplePaths"
+            "algorithm":"allPaths"
         }
         r = requests.post(ENDPOINT+"node/"+str(a._id)+"/paths", data=json.dumps(request))
         # print r.json()

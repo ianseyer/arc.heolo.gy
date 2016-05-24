@@ -4,11 +4,10 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from pymongo import MongoClient
 from bs4 import BeautifulSoup
-from tidylib import tidy_document
 
-import os, sys, json
+import os, sys, json, mmap
 
-rootdir = '/home/relay/code/wiki/dump/'
+rootdir = '/home/relay/code/wiki/arc.heolo.gy/dump/'
 
 Base = declarative_base()
 
@@ -43,6 +42,7 @@ def build_db(file):
     """
 
     collection = BeautifulSoup(file, 'html5lib')
+    print type(collection)
 
     #tidy up our XML, removing all div tags
     for div in collection.find_all('div'):
@@ -56,6 +56,7 @@ def build_db(file):
 
     articles_in_file = []
     for entry in collection.find_all('doc'):
+	print entry
         relations = []
         try:
             for link in entry.find_all('a'):
@@ -87,4 +88,4 @@ if __name__ == '__main__':
     #iterate through our dump directory
         for file in files:
             #build the database entries
-            build_db(open(subdir+'/'+file))
+			build_db(open(subdir+"/"+file))

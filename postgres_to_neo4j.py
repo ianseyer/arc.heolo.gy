@@ -52,10 +52,10 @@ def create_nodes():
 def create_relationships():
     for entry in session.query(Article).yield_per(5000):
         #iterate through all entries again, and build a relationship between parent and relations
-        parent = graph.find_one("Article", "title", entry.title.lower())
-        for relation in json.loads(entry.relations):
+        parent = graph.find_one("Article", "lowerTitle", entry.title.lower())
+        for relation in entry.relations:
             try:
-                child = graph.find_one("Article", "title", urllib.unquote(relation).lower().encode('utf-8'))
+                child = graph.find_one("Article", "lowerTitle", relation.lower())
                 #be sure to use the unique restraint
                 if parent and child:
                     graph.create_unique(
@@ -65,6 +65,7 @@ def create_relationships():
                             child
                         )
                     )
+		    print entry.title, relation
                 else:
                     print "Relating article not found"
             except Exception as e:
