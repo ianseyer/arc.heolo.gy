@@ -13,20 +13,20 @@ app.controller('graph', ['$scope', '$http', 'APIURL', function($scope, $http, AP
     console.log(one.data.data[0][0].metadata.id);
     $http.post(APIURL+'cypher', {
       "query":"MATCH (n:Article {lowerTitle: {title}}) RETURN n",
-      "params":{"title":"poland"}
+      "params":{"title":"physics"}
     }).then(function(two){
       var oneId = one.data.data[0][0].metadata.id;
       var twoHref = two.data.data[0][0].self;
       $http.post(APIURL+'node/'+oneId+'/paths', {
         "to": twoHref,
-        "max_depth": 4,
+        "max_depth": 3,
         "relationships": {
           "type": "LINKS",
           "direction": "out"
         },
         "algorithm":"shortestPath"
       }).then(function(paths){
-        paths.data.slice(0,10).forEach(function(path, pathIndex, pathArray){
+        paths.data.slice(0,3).forEach(function(path, pathIndex, pathArray){
           path.nodes.forEach(function(node, nodeIndex, nodeArray){
             $http.get(node).then(function(response){
               nodes.push(response.data.data);
