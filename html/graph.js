@@ -26,6 +26,7 @@ app.controller('graph', ['$scope', '$http', 'APIURL', function($scope, $http, AP
         },
         "algorithm":"shortestPath"
       }).then(function(paths){
+        console.log(paths)
         paths.data.forEach(function(path, pathIndex, pathArray){
           path.nodes.forEach(function(node, nodeIndex, nodeArray){
             console.log(node)
