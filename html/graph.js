@@ -1,7 +1,7 @@
 'use strict';
 
 var app = angular.module('archeology', ['nvd3'])
-app.value('APIURL', 'https://184.173.249.58/db/data/')
+app.value('APIURL', 'https://neo4j:wikipedia@184.173.249.58:7473/db/data/')
 
 app.controller('graph', ['$scope', '$http', 'APIURL', function($scope, $http, APIURL){
   var one = $http.post(APIURL+'cypher', {
