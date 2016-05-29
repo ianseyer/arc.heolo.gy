@@ -61,7 +61,7 @@ app.controller('graph', ['$scope', '$http', 'APIURL', function($scope, $http, AP
           }
       }
   };
-
+  console.log(relationships)
   $scope.data = {
       "nodes":nodes,
       "links":relationships
