@@ -16,7 +16,7 @@ app.controller('graph', ['$scope', '$http', 'APIURL', function($scope, $http, AP
       var oneId = one.data.data[0][0].metadata.id;
       var twoHref = two.data.data[0][0].self;
       $http.post(APIURL+'node/'+oneId+'/paths', {
-        "to": self,
+        "to": twoHref,
         "max_depth": 4,
         "relationships": {
           "type": "LINKS",
