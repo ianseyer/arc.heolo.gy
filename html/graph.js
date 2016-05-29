@@ -28,7 +28,7 @@ app.controller('graph', ['$scope', '$http', 'APIURL', function($scope, $http, AP
       }).then(function(paths){
         paths.data.forEach(function(path, pathIndex, pathArray){
           path.nodes.forEach(function(node, nodeIndex, nodeArray){
-            nodes.append($http.get(node))
+            nodes.push($http.get(node))
             // relationships.append({"source":})
           })
         })
