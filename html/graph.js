@@ -3,7 +3,7 @@
 var app = angular.module('archeology', ['nvd3'])
 app.value('APIURL', 'https://neo4j:wikipedia@184.173.249.58/db/data/')
 
-app.controller('graph', ['$scope', function($scope){
+app.controller('graph', ['$scope', '$http', function($scope, $http){
   var one = $http.post(APIURL+'cypher', {
     "query":"MATCH (n:Article {lowerTitle: {title}})",
     "params":{"title":"quantum mechanis"}
