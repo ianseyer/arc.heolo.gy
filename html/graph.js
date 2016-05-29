@@ -15,7 +15,7 @@ app.factory('FindPath', ['FindArticle', 'APIURL'], function(one, two, depth){
   var two = FindArticle(two);
 
   paths = $http.post(APIURL+'node/'+one.metadata.id+'/path', {
-    "to" : two.metadata.id
+    "to" : two.metadata.id,
     "max_depth": depth,
     "relationships": {
       "type": "LINKS",
