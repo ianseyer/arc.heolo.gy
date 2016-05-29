@@ -8,13 +8,15 @@ app.controller('graph', ['$scope', '$http', 'APIURL', function($scope, $http, AP
     "query":"MATCH (n:Article {lowerTitle: {title}}) RETURN n",
     "params":{"title":"quantum mechanics"}
   }).then(function(one){
-    console.log(one.data.data[0][0]);
+    console.log(one.data.data[0][0].metadata.id);
     $http.post(APIURL+'cypher', {
       "query":"MATCH (n:Article {lowerTitle: {title}}) RETURN n",
       "params":{"title":"poland"}
     }).then(function(two){
-      $http.post(APIURL+'node/'+one.metadata.id+'/path', {
-        "to": two.metadata.id,
+      var oneId = one.data.data[0][0].metadata.id;
+      var two = two.data.data[0][0].metadata.id;
+      $http.post(APIURL+'node/'+oneId+'/path', {
+        "to": twoId,
         "max_depth": depth,
         "relationships": {
           "type": "LINKS",
