@@ -4,6 +4,8 @@ var app = angular.module('archeology', ['nvd3'])
 app.value('APIURL', 'http://184.173.249.58:7474/db/data/')
 
 app.controller('graph', ['$scope', '$http', 'APIURL', function($scope, $http, APIURL){
+  var nodes = []
+  var relationships = []
   $http.post(APIURL+'cypher', {
     "query":"MATCH (n:Article {lowerTitle: {title}}) RETURN n",
     "params":{"title":"quantum mechanics"}
@@ -24,8 +26,12 @@ app.controller('graph', ['$scope', '$http', 'APIURL', function($scope, $http, AP
         },
         "algorithm":"shortestPath"
       }).then(function(paths){
-        console.log(paths);
-        alert(paths);
+        paths.data.forEach(function(path, index, array){
+          value.nodes.forEach(function(node, index, array){
+            nodes.append($http.get(node))
+            // relationships.append({"source":})
+          })
+        })
       })
     })
   })
@@ -52,7 +58,7 @@ app.controller('graph', ['$scope', '$http', 'APIURL', function($scope, $http, AP
   };
 
   $scope.data = {
-      "nodes":[],
+      "nodes":nodes,
       "links":[]
   }
 }])
