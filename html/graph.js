@@ -26,8 +26,8 @@ app.controller('graph', ['$scope', '$http', 'APIURL', function($scope, $http, AP
         },
         "algorithm":"shortestPath"
       }).then(function(paths){
-        paths.data.forEach(function(path, index, array){
-          value.nodes.forEach(function(node, index, array){
+        paths.data.forEach(function(path, pathIndex, pathArray){
+          path.nodes.forEach(function(node, nodeIndex, nodeArray){
             nodes.append($http.get(node))
             // relationships.append({"source":})
           })
