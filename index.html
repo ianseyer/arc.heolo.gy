@@ -14,8 +14,7 @@
 	<body>
 		<div ng-app="archeology">
 			<div ng-controller="graph">
-				<div ng-repeat="path in $scope.paths">
-					{{path}}
+				<div ng-bind=" $scope.paths">
 				</div>
 			</div>
 		</div>
