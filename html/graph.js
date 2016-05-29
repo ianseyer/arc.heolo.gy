@@ -32,7 +32,7 @@ app.controller('graph', ['$scope', '$http', 'APIURL', function($scope, $http, AP
             console.log(node)
             $http.get(node).then(function(response){
               console.log(response);
-              nodes.push(response.data);
+              nodes.push(response.data.data);
             })
           })
         })
