@@ -21,6 +21,7 @@ app.controller('graph', ['$scope', '$http', 'APIURL', function($scope, $http, AP
         },
         algorithm:"shortestPath"
       }).then(function(paths){
+        console.log(paths);
         alert(paths);
       })
     })
