@@ -28,12 +28,11 @@ app.controller('graph', ['$scope', '$http', 'APIURL', function($scope, $http, AP
       }).then(function(paths){
         paths.data.forEach(function(path, pathIndex, pathArray){
           path.nodes.forEach(function(node, nodeIndex, nodeArray){
+            console.log(node)
             $http.get(node).then(function(response){
               console.log(response);
               nodes.push(response);
             })
-            // nodes.push(node)
-            // relationships.append({"source":})
           })
         })
       })
