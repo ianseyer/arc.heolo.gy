@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('archeology', ['nvd3', 'restangular'])
-    .controller('graph', function($scope){
+angular.module('archeology', ['nvd3'])
+    .controller('graph', function($scope, Restangular){
         Restangular.setBaseUrl("https://http://184.173.249.58:7474/db/data");
         var query = {
           "query": "MATCH (n:Article {lowerTitle: {title}}) RETURN n",
