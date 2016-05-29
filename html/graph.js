@@ -1,8 +1,26 @@
 'use strict';
 
-angular.module('archeology', ['nvd3', 'restangular'])
-    .controller('graph', function($scope, Restangular){
-        Restangular.setBaseUrl("https://http://184.173.249.58:7474/db/data");
+var app = angular.module('archeology', ['nvd3', 'restangular'])
+
+app.config(function(RestangularProvider) {
+      RestangularProvider.setBaseUrl('https://neo4j:wikipedia@184.173.249.58/db/data');
+      RestangularProvider.setDefaultRequestParams()
+      RestangularProvider.setRestangularFields({
+        id: 'metadata.id'
+        selfLink: 'self'
+      });
+
+      RestangularProvider.setRequestInterceptor(function(elem, operation, what) {
+
+        if (operation === 'put') {
+          elem._id = undefined;
+          return elem;
+        }
+        return elem;
+      })
+    })
+
+app.controller('graph', function($scope, Restangular){
         var cypher = Restangular.all('cypher')
         var query = {
           "query": "MATCH (n:Article {lowerTitle: {title}}) RETURN n",
