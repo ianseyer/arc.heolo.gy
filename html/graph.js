@@ -36,10 +36,6 @@ app.controller('graph', ['$scope', '$http', 'APIURL', function($scope, $http, AP
             })
           })
         })
-        $scope.data = {
-            "nodes":nodes,
-            "links":relationships
-        }
       })
     })
   })
@@ -64,4 +60,9 @@ app.controller('graph', ['$scope', '$http', 'APIURL', function($scope, $http, AP
           }
       }
   };
+
+  $scope.data = {
+      "nodes":nodes,
+      "links":relationships
+  }
 }])
