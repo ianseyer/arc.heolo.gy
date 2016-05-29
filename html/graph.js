@@ -30,7 +30,7 @@ app.controller('graph', ['$scope', '$http', 'APIURL', function($scope, $http, AP
           path.nodes.forEach(function(node, nodeIndex, nodeArray){
             $http.get(node).then(function(response){
               nodes.push(response.data.data);
-              if(nodes.length != 0){
+              if(nodes.length != 0 && nodes.length != 1){
                 relationships.push({"source":nodes.length-1, "target":nodes.length-2, "value":1})
               }
             })
