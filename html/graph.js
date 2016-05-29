@@ -13,7 +13,7 @@ app.controller('graph', ['$scope', '$http', 'APIURL', function($scope, $http, AP
     console.log(one.data.data[0][0].metadata.id);
     $http.post(APIURL+'cypher', {
       "query":"MATCH (n:Article {lowerTitle: {title}}) RETURN n",
-      "params":{"title":"physics"}
+      "params":{"title":"wine"}
     }).then(function(two){
       var oneId = one.data.data[0][0].metadata.id;
       var twoHref = two.data.data[0][0].self;
