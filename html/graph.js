@@ -8,7 +8,7 @@ app.controller('graph', ['$scope', '$http', 'APIURL', function($scope, $http, AP
     "query":"MATCH (n:Article {lowerTitle: {title}}) RETURN n",
     "params":{"title":"quantum mechanics"}
   }).then(function(one){
-    console.log(one.data.data.id);
+    console.log(one.data);
     $http.post(APIURL+'cypher', {
       "query":"MATCH (n:Article {lowerTitle: {title}}) RETURN n",
       "params":{"title":"poland"}
