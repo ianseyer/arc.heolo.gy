@@ -3,16 +3,17 @@
 angular.module('archeology', ['nvd3', 'restangular'])
     .controller('graph', function($scope, Restangular){
         Restangular.setBaseUrl("https://http://184.173.249.58:7474/db/data");
+        var cypher = Restangular.all('cypher')
         var query = {
           "query": "MATCH (n:Article {lowerTitle: {title}}) RETURN n",
           "params": {"title":"quantum mechanics"}
         }
-        var nodeOne = Restangular.all('cypher').post(query)
+        var nodeOne = cypher.post(query)
         query = {
           "query": "MATCH (n:Article {lowerTitle: {title}}) RETURN n",
           "params": {"title":"poland"}
         }
-        var nodeTwo = Restangular.all('cypher').post(query)
+        var nodeTwo = cypher.post(query)
         query = {
           "to" : nodeOne.self,
           "max_depth": 4,
