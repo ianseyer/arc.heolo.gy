@@ -7,11 +7,11 @@ app.controller('graph', ['$scope', '$http', 'APIURL', function($scope, $http, AP
   $http.post(APIURL+'cypher', {
     "query":"MATCH (n:Article {lowerTitle: {title}})",
     "params":{"title":"quantum mechanis"}
-  }, {'content-type':'JSON'}).then(function(one){
+  }).then(function(one){
     $http.post(APIURL+'cypher', {
       "query":"MATCH (n:Article {lowerTitle: {title}})",
       "params":{"title":"poland"}
-    }, {'content-type':'JSON'}).then(function(two){
+    }).then(function(two){
       $http.post(APIURL+'node/'+one.metadata.id+'/path', {
         "to": two.metadata.id,
         "max_depth": depth,
@@ -20,7 +20,7 @@ app.controller('graph', ['$scope', '$http', 'APIURL', function($scope, $http, AP
           "direction": "out"
         },
         "algorithm":"shortestPath"
-      }, {'content-type':'JSON'}).then(function(paths){
+      }).then(function(paths){
         console.log(paths);
         alert(paths);
       })
