@@ -5,11 +5,11 @@ app.value('APIURL', 'http://184.173.249.58:7474/db/data/')
 
 app.controller('graph', ['$scope', '$http', 'APIURL', function($scope, $http, APIURL){
   $http.post(APIURL+'cypher', {
-    "query":"MATCH (n:Article {lowerTitle: {title}})",
-    "params":{"title":"quantum mechanis"}
+    "query":"MATCH (n:Article {lowerTitle: {title}}) RETURN n",
+    "params":{"title":"quantum mechanics"}
   }).then(function(one){
     $http.post(APIURL+'cypher', {
-      "query":"MATCH (n:Article {lowerTitle: {title}})",
+      "query":"MATCH (n:Article {lowerTitle: {title}}) RETURN n",
       "params":{"title":"poland"}
     }).then(function(two){
       $http.post(APIURL+'node/'+one.metadata.id+'/path', {
