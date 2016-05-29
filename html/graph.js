@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('archeology', ['nvd3', 'Restangular'])
+angular.module('archeology', ['nvd3', 'restangular'])
     .controller('graph', function($scope){
         Restangular.setBaseUrl("https://http://184.173.249.58:7474/db/data");
         var query = {
