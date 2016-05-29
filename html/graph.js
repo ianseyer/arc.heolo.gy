@@ -30,9 +30,9 @@ app.controller('graph', ['$scope', '$http', 'APIURL', function($scope, $http, AP
           path.nodes.forEach(function(node, nodeIndex, nodeArray){
             $http.get(node).then(function(response){
               nodes.push(response.data.data);
-              if(nodes.length > 0){
-                relationships.push({"source":nodes.length-1, "target":nodes.length, "value":1})
-              }
+              // if(nodes.length > 0){
+              //   relationships.push({"source":nodes.length-1, "target":nodes.length, "value":1})
+              // }
             })
           })
         })
