@@ -19,7 +19,7 @@ app.controller('graph', ['$scope', '$http', 'APIURL', function($scope, $http, AP
       var twoHref = two.data.data[0][0].self;
       $http.post(APIURL+'node/'+oneId+'/paths', {
         "to": twoHref,
-        "max_depth": 4,
+        "max_depth": 3,
         "relationships": {
           "type": "LINKS",
           "direction": "out"
@@ -28,7 +28,10 @@ app.controller('graph', ['$scope', '$http', 'APIURL', function($scope, $http, AP
       }).then(function(paths){
         paths.data.forEach(function(path, pathIndex, pathArray){
           path.nodes.forEach(function(node, nodeIndex, nodeArray){
-            node = $http.get(node);
+            $http.get(node).then(function(node){
+              console.log(node);
+              nodes.push(node);
+            })
             console.log(node);
             // nodes.push(node)
             // relationships.append({"source":})
