@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module('mainApp', ['mainApp.controllers','ngRoute', 'json-tree', 'nvd3', 'gridster', 'ui.bootstrap'])
+var app = angular.module('mainApp', ['mainApp.controllers', 'restangular', 'ngRoute', 'json-tree', 'nvd3', 'gridster', 'ui.bootstrap'])
 
 /**
  * Config -------------------------------------------------------------------------
