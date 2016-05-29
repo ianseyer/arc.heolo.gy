@@ -17,7 +17,7 @@ app.controller('graph', ['$scope', '$http', 'APIURL', function($scope, $http, AP
       var twoId = two.data.data[0][0].metadata.id;
       $http.post(APIURL+'node/'+oneId+'/path', {
         "to": twoId,
-        "max_depth": depth,
+        "max_depth": 4,
         "relationships": {
           "type": "LINKS",
           "direction": "out"
