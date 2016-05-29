@@ -50,7 +50,7 @@ app.controller('graph', ['FindArticle', 'FindPath'], function($scope){
   };
 
   $scope.data = {
-      "nodes":[]
+      "nodes":[],
       "links":[
           {"source":1,"target":0,"value":1},
           {"source":2,"target":0,"value":8},
