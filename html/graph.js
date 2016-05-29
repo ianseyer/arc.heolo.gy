@@ -33,6 +33,7 @@ app.controller('graph', ['$scope', '$http', 'APIURL', function($scope, $http, AP
             $http.get(node).then(function(response){
               console.log(response);
               nodes.push(response.data.data);
+              relationships.push({"source":nodes.length-1, "target":nodes.length-2, "value":1})
             })
           })
         })
@@ -63,6 +64,6 @@ app.controller('graph', ['$scope', '$http', 'APIURL', function($scope, $http, AP
 
   $scope.data = {
       "nodes":nodes,
-      "links":[]
+      "links":relationships
   }
 }])
