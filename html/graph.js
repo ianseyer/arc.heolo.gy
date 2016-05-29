@@ -4,27 +4,28 @@ var app = angular.module('archeology', ['nvd3'])
 app.value('APIURL', 'https://neo4j:wikipedia@184.173.249.58:7473/db/data/')
 
 app.controller('graph', ['$scope', '$http', 'APIURL', function($scope, $http, APIURL){
-  var one = $http.post(APIURL+'cypher', {
+  $http.post(APIURL+'cypher', {
     "query":"MATCH (n:Article {lowerTitle: {title}})",
     "params":{"title":"quantum mechanis"}
+  }).then(function(one){
+    $http.post(APIURL+'cypher', {
+      "query":"MATCH (n:Article {lowerTitle: {title}})",
+      "params":{"title":"poland"}
+    }).then(function(two){
+      $http.post(APIURL+'node/'+one.metadata.id+'/path', {
+        to: two.metadata.id,
+        max_depth: depth,
+        relationships: {
+          type: "LINKS",
+          direction: "out"
+        },
+        algorithm:"shortestPath"
+      }).then(function(paths){
+        alert(paths);
+      })
+    })
   })
 
-  var two = $http.post(APIURL+'cypher', {
-    "query":"MATCH (n:Article {lowerTitle: {title}})",
-    "params":{"title":"poland"}
-  })
-
-  var paths = $http.post(APIURL+'node/'+one.metadata.id+'/path', {
-    to: two.metadata.id,
-    max_depth: depth,
-    relationships: {
-      type: "LINKS",
-      direction: "out"
-    },
-    algorithm:"shortestPath"
-  })
-
-  alert(paths)
   var color = d3.scale.category20()
   $scope.options = {
       chart: {
