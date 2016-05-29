@@ -1,14 +1,13 @@
 'use strict';
 
-angular.module('mainApp.controllers')
-
-    .controller('forceDirectedGraphCtrl', function($scope){
+angular.module('archeology', ['nvd3'])
+    .controller('graph', function($scope){
         var color = d3.scale.category20()
         $scope.options = {
             chart: {
                 type: 'forceDirectedGraph',
-                height: 450,
-                 width: (function(){ return nv.utils.windowSize().width - 450 })(),
+                height: (function(){ return nv.utils.windowSize().height})(),
+                 width: (function(){ return nv.utils.windowSize().width})(),
                 margin:{top: 20, right: 20, bottom: 20, left: 20},
                 color: function(d){
                     return color(d.group)

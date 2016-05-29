@@ -1,0 +1,20 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" type="text/css" href="http://krispo.github.io/angular-nvd3/bower_components/nvd3/build/nv.d3.css"></link>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.3/nv.d3.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-nvd3/1.0.7/angular-nvd3.min.js"></script>
+		<script src="http://krispo.github.io/angular-nvd3/bower_components/nvd3/build/nv.d3.js"></script>
+	</head>
+
+	<body> 
+		<div ng-app="archeology">
+			<div ng-controller="graph">
+				<nvd3 options="options" data="data"></nvd3>
+			</div>
+		</div>
+		<script src="./graph.js"></script>
+	</body>
+</html>
