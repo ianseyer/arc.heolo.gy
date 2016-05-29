@@ -19,7 +19,7 @@ app.controller('graph', ['$scope', '$http', 'APIURL', function($scope, $http, AP
       var twoHref = two.data.data[0][0].self;
       $http.post(APIURL+'node/'+oneId+'/paths', {
         "to": twoHref,
-        "max_depth": 3,
+        "max_depth": 4,
         "relationships": {
           "type": "LINKS",
           "direction": "out"
