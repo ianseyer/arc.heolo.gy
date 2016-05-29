@@ -1,7 +1,7 @@
 'use strict';
 
 var app = angular.module('archeology', ['nvd3'])
-app.value('APIURL', 'https://neo4j:wikipedia@184.173.249.58:7473/db/data/')
+app.value('APIURL', 'http://neo4j:wikipedia@184.173.249.58:7474/db/data/')
 
 app.controller('graph', ['$scope', '$http', 'APIURL', function($scope, $http, APIURL){
   $http.post(APIURL+'cypher', {
@@ -13,13 +13,13 @@ app.controller('graph', ['$scope', '$http', 'APIURL', function($scope, $http, AP
       "params":{"title":"poland"}
     }).then(function(two){
       $http.post(APIURL+'node/'+one.metadata.id+'/path', {
-        to: two.metadata.id,
-        max_depth: depth,
-        relationships: {
-          type: "LINKS",
-          direction: "out"
+        "to": two.metadata.id,
+        "max_depth": depth,
+        "relationships": {
+          "type": "LINKS",
+          "direction": "out"
         },
-        algorithm:"shortestPath"
+        "algorithm":"shortestPath"
       }).then(function(paths){
         console.log(paths);
         alert(paths);
