@@ -8,25 +8,34 @@ app.controller('graph', ['$scope', '$http', 'APIURL', function($scope, $http, AP
   var relationships = []
   $http.post(APIURL+'cypher', {
     "query":"MATCH (n:Article {lowerTitle: {title}}) RETURN n",
-    "params":{"title":"quantum mechanics"}
+    "params":{"title":"the x-files"}
   }).then(function(one){
-    console.log(one.data.data[0][0].metadata.id);
+    console.log(one.data.data[0][0].data.relations);
     $http.post(APIURL+'cypher', {
       "query":"MATCH (n:Article {lowerTitle: {title}}) RETURN n",
-      "params":{"title":"wine"}
+      "params":{"title":"walter skinner"}
     }).then(function(two){
       var oneId = one.data.data[0][0].metadata.id;
       var twoHref = two.data.data[0][0].self;
       $http.post(APIURL+'node/'+oneId+'/paths', {
         "to": twoHref,
-        "max_depth": 3,
+        "max_depth": 4,
         "relationships": {
           "type": "LINKS",
           "direction": "out"
         },
-        "algorithm":"shortestPath"
+        "algorithm":"allSimplePaths"
       }).then(function(paths){
-        $scope.paths = paths;
+        $scope.paths = []
+        paths.data.slice(0,10).forEach(function(path, index, array){
+          var singlePath = []
+          path.nodes.forEach(function(node, index, array){
+            $http.get(node).then(function(node){
+              singlePath.push(node.data.data.title)
+              $scope.paths.push(singlePath)
+            })
+          })
+        })
       })
     })
   })
@@ -57,3 +66,9 @@ app.controller('graph', ['$scope', '$http', 'APIURL', function($scope, $http, AP
       "links":relationships
   }
 }])
+
+app.directive("path", function(){
+  return {
+    template: "{{ paths }}"
+  }
+})
