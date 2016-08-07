@@ -1,0 +1,6 @@
+dump/
+*.pyc
+data/
+tidy-html5/
+wikipedia.xml
+env/
