@@ -11,6 +11,7 @@ else:
 
     a = graph.find_one("Article", "lowerTitle", sys.argv[1].lower())
     b = graph.find_one("Article", "lowerTitle", sys.argv[2].lower())
+    #print a, b
     if a and b:
         ENDPOINT = "http://neo4j:wikipedia@localhost:7474/db/data/"
         request = {
@@ -20,7 +21,7 @@ else:
                 "type":"LINKS",
                 "direction":"out"
             },
-            "algorithm":"allPaths"
+            "algorithm":"allSimplePaths"
         }
         r = requests.post(ENDPOINT+"node/"+str(a._id)+"/paths", data=json.dumps(request))
         # print r.json()
